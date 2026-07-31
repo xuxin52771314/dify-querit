@@ -1,0 +1,103 @@
+identity:
+  name: "querit_contents"
+  author: "querit-ai"
+  label:
+    en_US: "Querit Contents"
+    zh_Hans: "Querit 网页内容抓取"
+    pt_BR: "Querit Contents"
+    ja_JP: "Querit Contents"
+description:
+  human:
+    en_US: "Crawl up to 10 web pages and return their contents in text, Markdown, or HTML format with optional page metadata."
+    zh_Hans: "抓取最多 10 个网页，并以文本、Markdown 或 HTML 格式返回正文及可选的页面元数据。"
+    pt_BR: "Crawl up to 10 web pages and return their contents with optional metadata."
+    ja_JP: "Crawl up to 10 web pages and return their contents with optional metadata."
+  llm: "Crawl one or more HTTP(S) URLs and return the full page contents with optional metadata."
+parameters:
+  - name: urls
+    type: string
+    required: true
+    label:
+      en_US: "URLs"
+      zh_Hans: "网页 URLs"
+      pt_BR: "URLs"
+      ja_JP: "URLs"
+    human_description:
+      en_US: "One HTTP(S) URL, one URL per line, or a JSON array of URLs. At least 1 and at most 10 URLs."
+      zh_Hans: "输入单个 HTTP(S) URL、每行一个 URL，或 URL 的 JSON 数组。最少 1 个，最多 10 个。"
+      pt_BR: "One HTTP(S) URL per line or a JSON array, with at most 10 URLs."
+      ja_JP: "One HTTP(S) URL per line or a JSON array, with at most 10 URLs."
+    llm_description: "HTTP(S) URLs to crawl. Supply one URL, one URL per line, or a JSON array containing 1 to 10 URLs."
+    form: llm
+  - name: format
+    type: select
+    required: false
+    default: "markdown"
+    options:
+      - value: "markdown"
+        label:
+          en_US: "Markdown"
+          zh_Hans: "Markdown"
+          pt_BR: "Markdown"
+          ja_JP: "Markdown"
+      - value: "text"
+        label:
+          en_US: "Text"
+          zh_Hans: "纯文本"
+          pt_BR: "Text"
+          ja_JP: "Text"
+      - value: "html"
+        label:
+          en_US: "HTML"
+          zh_Hans: "HTML"
+          pt_BR: "HTML"
+          ja_JP: "HTML"
+    label:
+      en_US: "Content Format"
+      zh_Hans: "内容格式"
+      pt_BR: "Content Format"
+      ja_JP: "Content Format"
+    human_description:
+      en_US: "The output format for crawled page content. Defaults to Markdown."
+      zh_Hans: "抓取内容的输出格式，默认为 Markdown。"
+      pt_BR: "The output format for crawled page content."
+      ja_JP: "The output format for crawled page content."
+    llm_description: "Output format: markdown, text, or html."
+    form: form
+  - name: crawl_timeout
+    type: number
+    required: false
+    default: 10
+    min: 1
+    max: 60
+    label:
+      en_US: "Crawl Timeout"
+      zh_Hans: "抓取超时"
+      pt_BR: "Crawl Timeout"
+      ja_JP: "Crawl Timeout"
+    human_description:
+      en_US: "Page crawl timeout in seconds, from 1 to 60. Defaults to 10 seconds."
+      zh_Hans: "网页抓取超时时间，范围为 1 到 60 秒，默认为 10 秒。"
+      pt_BR: "Page crawl timeout from 1 to 60 seconds."
+      ja_JP: "Page crawl timeout from 1 to 60 seconds."
+    llm_description: "Page crawl timeout in seconds, from 1 to 60."
+    form: form
+  - name: extras_meta
+    type: boolean
+    required: false
+    default: false
+    label:
+      en_US: "Include Page Metadata"
+      zh_Hans: "包含页面元数据"
+      pt_BR: "Include Page Metadata"
+      ja_JP: "Include Page Metadata"
+    human_description:
+      en_US: "Return page title, publication time, site name, and site icon when available."
+      zh_Hans: "在可用时返回页面标题、发布时间、站点名称和站点图标。"
+      pt_BR: "Return additional page metadata when available."
+      ja_JP: "Return additional page metadata when available."
+    llm_description: "Whether to return additional page metadata."
+    form: form
+extra:
+  python:
+    source: tools/querit_contents.py

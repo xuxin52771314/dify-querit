@@ -87,6 +87,7 @@ credentials_for_provider: #Add credentials_for_provider field
 
 tools:
   - tools/dify_querit.yaml
+  - tools/querit_contents.yaml
 extra:
   python:
     source: provider/dify_querit.py

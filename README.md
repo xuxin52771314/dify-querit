@@ -1,18 +1,18 @@
 # Querit Search Plugin for Dify
 
-[![Version](https://img.shields.io/badge/version-0.0.1-blue)](https://github.com/querit-ai/dify-querit)
+[![Version](https://img.shields.io/badge/version-0.0.3-blue)](https://github.com/querit-ai/dify-querit)
 [![Python](https://img.shields.io/badge/python-3.12+-green)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-orange)](LICENSE)
 
 **Author:** querit-ai
-**Version:** 0.0.2
+**Version:** 0.0.3
 **Type:** Dify Tool Plugin
 
 ---
 
 ## What is Querit.ai Search?
 
-Querit.ai Search is a retrieval system specifically designed for generative LLMs invocation scenarios, providing real-time search results.
+[Querit.ai](https://www.querit.ai/) Search is a retrieval system specifically designed for generative LLMs invocation scenarios, providing real-time search results.
 
 Limited training data and local knowledge bases restrict LLMs, leading to hallucinations and timeliness issues when handling complex or real-time queries. To address this, AI search needs to provide retrieval services that are **real-time**, **authoritative**, **accurate**, **high-quality**, and **comprehensive**. Therefore, we offer a Web Search API that seamlessly integrates with your LLM applications, giving you access to authoritative, accurate, and high-quality information from across the web.
 
@@ -38,6 +38,9 @@ Querit.ai provides a global-scale multilingual indexing and semantic understandi
 - Real-time web search for LLM applications
 - Natural language query understanding
 - Structured search results with URLs, images, and data
+- Full-page content crawling for up to 10 URLs per request
+- Text, Markdown, and HTML content output formats
+- Optional page metadata, including title, publication time, site name, and site icon
 - Global multi-language coverage
 - Low-latency enterprise-grade API
 
@@ -83,19 +86,67 @@ Querit.ai provides a global-scale multilingual indexing and semantic understandi
 
 1. Install the plugin in your Dify workspace
 2. Configure the Querit API key in the plugin settings
-3. Use the Querit Search tool in your AI agents/workflows
+3. Use the Querit Search or Querit Contents tool in your AI agents/workflows
 
-### API Endpoint
+### API Endpoints
 
-The plugin uses the Querit Search API:
+#### Search API
+
+Search the web with a natural language query and return structured results.
 
 ```
 POST https://api.querit.ai/v1/search
 ```
 
 **Parameters:**
-- `query`: The search query (natural language)
-- `count`: Number of results to return (optional)
+- `query`: The natural language search query (required)
+- `count`: The maximum number of search results to return (optional)
+- `filters`: Additional conditions used to refine the search results (optional)
+- `filters.language`: Restricts results to the specified language, such as `english` (optional)
+
+Example request:
+
+```json
+{
+  "query": "what does salesforce do",
+  "count": 5,
+  "filters": {
+    "language": "english"
+  }
+}
+```
+
+#### Contents API
+
+Crawl one or more web pages and return their contents with optional metadata.
+
+```
+POST https://api.querit.ai/v1/contents
+```
+
+**Parameters:**
+- `urls`: URLs of pages to crawl. At least 1 and at most 10 URLs are supported
+- `format`: Content output format. Supported values are `text`, `markdown`, and `html` (optional, defaults to `markdown`)
+- `crawlTimeout`: Page crawl timeout in seconds, from 1 to 60 (optional, defaults to `10`)
+- `extrasMeta`: Whether to include page metadata in each result (optional, defaults to `false`)
+
+**Response:**
+- `results`: Crawled page contents and optional metadata
+- `statuses`: Per-URL crawl status (`success` or `failed`)
+- `searchTime`: Server-side crawl time in seconds
+
+Example request:
+
+```json
+{
+  "urls": [
+    "https://example.com"
+  ],
+  "format": "markdown",
+  "crawlTimeout": 10,
+  "extrasMeta": true
+}
+```
 
 ---
 
