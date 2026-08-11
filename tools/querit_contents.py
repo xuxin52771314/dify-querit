@@ -16,7 +16,7 @@ class QueritContentsTool(Tool):
 
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
         try:
-            api_key = self.runtime.credentials["querit_api_key"]
+            credential = self.runtime.credentials["querit_api_key"]
             urls = self._parse_urls(tool_parameters.get("urls"))
             content_format = tool_parameters.get("format") or "markdown"
             crawl_timeout = self._parse_crawl_timeout(
@@ -36,7 +36,7 @@ class QueritContentsTool(Tool):
                 "extrasMeta": extras_meta,
             }
             headers = {
-                "Authorization": f"Bearer {api_key}",
+                "Authorization": f"Bearer {credential}",
                 "Content-Type": "application/json",
             }
 

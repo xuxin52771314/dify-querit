@@ -104,7 +104,56 @@ jobs:
             --head "${{ github.repository_owner }}:bump-${{ steps.get_basic_info.outputs.plugin_name }}-plugin-${{ steps.get_basic_info.outputs.version }}" \
             --base main \
             --title "bump ${{ steps.get_basic_info.outputs.plugin_name }} plugin to version ${{ steps.get_basic_info.outputs.version }}" \
-            --body "bump ${{ steps.get_basic_info.outputs.plugin_name }} plugin package to version ${{ steps.get_basic_info.outputs.version }}
+            --body "$(cat <<'EOF'
+          # Plugin Submission
 
-            Changes:
-            - Updated plugin package file" || echo "PR already exists or creation skipped." # Handle cases where PR already exists
+          ## Plugin information
+
+          - **Author**: ${{ steps.get_basic_info.outputs.author }}
+          - **Plugin name**: ${{ steps.get_basic_info.outputs.plugin_name }}
+          - **Version**: ${{ steps.get_basic_info.outputs.version }}
+          - **Source repository**: https://github.com/${{ github.repository }}
+          - **Contact**: support@querit.ai
+
+          ## Submission type
+
+          - [ ] New plugin
+          - [x] Version update
+
+          ## What changed
+
+          Updated the plugin and provider display name to Querit.ai.
+
+          ## Risk level
+
+          - [ ] Low risk
+          - [ ] Medium risk
+          - [x] High risk
+
+          The Contents tool accepts user-provided HTTP(S) URLs and asks the fixed Querit HTTPS API to crawl them.
+
+          ## Required checks
+
+          - [x] I have read and followed the Marketplace submission requirements.
+          - [x] I have read and comply with the Plugin Developer Agreement.
+          - [ ] I tested this plugin on Dify Community Edition and Dify Cloud, or documented any limitation below.
+          - [x] The package contains only files needed at runtime.
+          - [x] The package does not contain secrets, local credentials, caches, logs, or IDE files.
+          - [x] The package does not contain executables or bundled binaries.
+          - [x] The plugin README includes setup, usage, credential, connection, and source repository information.
+          - [x] The plugin includes a referenced privacy policy.
+          - [x] All user-facing text is primarily in English.
+
+          ## Security and privacy notes
+
+          The plugin sends search queries, user-provided URLs, crawl options, and the configured credential only to `https://api.querit.ai` over HTTPS. URL inputs are restricted to HTTP(S), each invocation accepts at most 10 URLs, and requests use a bounded timeout. The plugin does not persist credentials, requests, or responses.
+
+          ## Local validation
+
+          YAML parsing, `git diff --check`, Python compilation, plugin installation, and plugin packaging completed successfully.
+
+          ## Reviewer notes
+
+          Dify Community Edition and Dify Cloud manual testing was not performed for this metadata-only version update.
+          EOF
+          )" || echo "PR already exists or creation skipped." # Handle cases where PR already exists

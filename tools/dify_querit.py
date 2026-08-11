@@ -12,7 +12,7 @@ class DifyQueritTool(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
         try:
             # Get API key from runtime credentials
-            api_key = self.runtime.credentials["querit_api_key"]
+            credential = self.runtime.credentials["querit_api_key"]
             
             # Required parameter
             query = tool_parameters.get("query")
@@ -25,7 +25,7 @@ class DifyQueritTool(Tool):
             
             # Make API request
             headers = {
-                "Authorization": f"Bearer {api_key}",
+                "Authorization": f"Bearer {credential}",
                 "Content-Type": "application/json"
             }
             print("Payload being sent to Querit API:")
