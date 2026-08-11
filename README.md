@@ -1,15 +1,3 @@
-# Querit Search Plugin for Dify
-
-[![Version](https://img.shields.io/badge/version-0.0.3-blue)](https://github.com/querit-ai/dify-querit)
-[![Python](https://img.shields.io/badge/python-3.12+-green)](https://www.python.org/)
-[![License](https://img.shields.io/badge/license-MIT-orange)](LICENSE)
-
-**Author:** querit-ai
-**Version:** 0.0.3
-**Type:** Dify Tool Plugin
-
----
-
 ## What is Querit.ai Search?
 
 [Querit.ai](https://www.querit.ai/) Search is a retrieval system specifically designed for generative LLMs invocation scenarios, providing real-time search results.
