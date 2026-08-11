@@ -3,10 +3,10 @@ type: plugin
 author: querit-ai
 name: querit
 label:
-  en_US: "Querit Search Plugin"
-  ja_JP: "Querit Search Plugin"
-  zh_Hans: "Querit Search Plugin"
-  pt_BR: "Querit Search Plugin"
+  en_US: "Querit.ai"
+  ja_JP: "Querit.ai"
+  zh_Hans: "Querit.ai"
+  pt_BR: "Querit.ai"
 description:
   en_US: |
     This plugin integrates querit.ai real-time search and retrieval services into Dify platform through standardized APIs, allowing agents to query external knowledge sources with natural language and obtain structured search results.

@@ -2,10 +2,10 @@ identity:
   author: "querit-ai"
   name: "querit"
   label:
-    en_US: "Querit Search Plugin"
-    zh_Hans: "Querit Search Plugin"
-    pt_BR: "Querit Search Plugin"
-    ja_JP: "Querit Search Plugin"
+    en_US: "Querit.ai"
+    zh_Hans: "Querit.ai"
+    pt_BR: "Querit.ai"
+    ja_JP: "Querit.ai"
   tags:
   - search
   description:
