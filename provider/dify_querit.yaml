@@ -41,7 +41,7 @@ credentials_for_provider: #Add credentials_for_provider field
       zh_Hans: 从 Querit 获取你的 API key
       pt_BR: Obtenha sua chave da API do Querit no Querit
       ja_JP: QueritでAPIキーを取得してください
-    url: https://www.querit.ai/en/dashboard/api-keys
+    url: https://www.querit.ai/en?sa=difydify
 
 #########################################################################################
 # If you want to support OAuth, you can uncomment the following code.
